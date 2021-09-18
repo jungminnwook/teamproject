@@ -18,13 +18,14 @@ public class MemberVO {
 	private String id;
 	private String passwd;
 	private String name;
-	private String birth;
 	private String gender;
-	private String email;
-	private String recvEmail;
-	private Date createat;
-	private String address;
 	private String phonenumber;
+	private String email;
+	private String address1;
+	private String address2;
+	private String address3;
+	private String birth;
+	private Date create_at;
 }
 
 

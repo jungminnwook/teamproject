@@ -21,20 +21,20 @@ import com.team.service.MemberService;
 import com.team.util.Script;
 
 
-@Controller // @Component ê³„ì—´ ì• ë…¸í…Œì´ì…˜
+@Controller // @Component °è¿­ ¾Ö³ëÅ×ÀÌ¼Ç
 @RequestMapping("/member/*")
 public class MemberController {
 
 	private MemberService memberService;
 
-	// @Autowired ì• ë…¸í…Œì´ì…˜ì´ ìƒì„±ìì—ì„œëŠ” ìƒëµê°€ëŠ¥
+	// @Autowired ¾Ö³ëÅ×ÀÌ¼ÇÀÌ »ı¼ºÀÚ¿¡¼­´Â »ı·«°¡´É
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 
 	@GetMapping("/join") // /member/join
 	public String join() {
-		System.out.println("join í˜¸ì¶œë¨...");
+		System.out.println("join È£ÃâµÊ...");
 		return "member/join";
 	}
 	
@@ -42,32 +42,32 @@ public class MemberController {
 	@PostMapping("/join")
 	public ResponseEntity<String> join(MemberVO memberVO) {
 		
-		// ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™” í•˜ê¸°
+		// ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­ ÇÏ±â
 		String passwd = memberVO.getPasswd();
-		String hasedPw = BCrypt.hashpw(passwd, BCrypt.gensalt()); // ì•”í˜¸í™”ëœ ë¹„ë°€ë²ˆí˜¸ ë¦¬í„´ë°›ìŒ
-		memberVO.setPasswd(hasedPw); // ì•”í˜¸í™”ëœ ë¹„ë°€ë²ˆí˜¸ë¡œ ì¬ì„¤ì •
+		String hasedPw = BCrypt.hashpw(passwd, BCrypt.gensalt()); // ¾ÏÈ£È­µÈ ºñ¹Ğ¹øÈ£ ¸®ÅÏ¹ŞÀ½
+		memberVO.setPasswd(hasedPw); // ¾ÏÈ£È­µÈ ºñ¹Ğ¹øÈ£·Î Àç¼³Á¤
 		
-		// ì—°ì›”ì¼ êµ¬ë¶„ë¬¸ì("-") ì œê±°í•˜ê¸°
-		String birth = memberVO.getBirth(); // "2021-08-25"
-		birth = birth.replace("-", ""); // "20210825"
-		memberVO.setBirth(birth);
+		// ¿¬¿ùÀÏ ±¸ºĞ¹®ÀÚ("-") Á¦°ÅÇÏ±â
+		String birthday = memberVO.getBirth(); // "2021-08-25"
+		birthday = birthday.replace("-", ""); // "20210825"
+		memberVO.setBirth(birthday);
 		
-		// í˜„ì¬ì‹œì  ë‚ ì§œ ê°ì²´ ì„¤ì •
-		memberVO.setCreateat(new Date());
+		// ÇöÀç½ÃÁ¡ ³¯Â¥ °´Ã¼ ¼³Á¤
+		memberVO.setCreate_at(new Date());
 		
 		System.out.println(memberVO);
-		memberService.register(memberVO); // íšŒì›ë“±ë¡ ì²˜ë¦¬
+		memberService.register(memberVO); // È¸¿øµî·Ï Ã³¸®
 		
-		// ì„œë²„ì—ì„œ ë°ì´í„°ë¥¼ ì¶”ê°€,ìˆ˜ì •,ì‚­ì œ í›„ í™”ë©´ì‘ë‹µì„ ë°”ë¡œ ì¤„ë•ŒëŠ”
-		// ìƒˆë¡œê³ ì¹¨ ë°œìƒì‹œ ì„œë²„ì— ì˜¤ë¥˜ê°€ ë°œìƒë ìˆ˜ ìˆìœ¼ë¯€ë¡œ
-		// ë¦¬ë‹¤ì´ë ‰íŠ¸ë¥¼ í†µí•´ ì‚¬ìš©ìê°€ ë´ì•¼ë  í™”ë©´ ì£¼ì†Œë¡œ ìš”ì²­í•˜ê²Œ ë§Œë“ ë‹¤.
+		// ¼­¹ö¿¡¼­ µ¥ÀÌÅÍ¸¦ Ãß°¡,¼öÁ¤,»èÁ¦ ÈÄ È­¸éÀÀ´äÀ» ¹Ù·Î ÁÙ¶§´Â
+		// »õ·Î°íÄ§ ¹ß»ı½Ã ¼­¹ö¿¡ ¿À·ù°¡ ¹ß»ıµÉ¼ö ÀÖÀ¸¹Ç·Î
+		// ¸®´ÙÀÌ·ºÆ®¸¦ ÅëÇØ »ç¿ëÀÚ°¡ ºÁ¾ßµÉ È­¸é ÁÖ¼Ò·Î ¿äÃ»ÇÏ°Ô ¸¸µç´Ù.
 		// "redirect:/member/login";
 		
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
 		
-		String str = Script.href("íšŒì›ê°€ì… ì„±ê³µ!", "/member/login");
+		String str = Script.href("È¸¿ø°¡ÀÔ ¼º°ø!", "/");
 		
 		return new ResponseEntity<String>(str, headers, HttpStatus.OK);
 	}
@@ -89,14 +89,15 @@ public class MemberController {
 		if (memberVO != null) {
 			isPasswdSame = BCrypt.checkpw(passwd, memberVO.getPasswd());
 
-			if (isPasswdSame == false) { // ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•˜ì§€ ì•ŠìŒ
-				message = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+			if (isPasswdSame == false) { // ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÏÁö ¾ÊÀ½
+				System.out.println("ÄÁÆ®·Ñ·¯Å×½ºÆ®" + memberVO.getId());
+				message = "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
 			}
-		} else { // memberVO == null // ì¼ì¹˜í•˜ëŠ” ì•„ì´ë””ê°€ ì—†ìŒ
-			message = "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.";
+		} else { // memberVO == null // ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµğ°¡ ¾øÀ½
+			message = "Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.";
 		}
 
-		// ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ (ì—†ëŠ” ì•„ì´ë””ê±°ë‚˜ ë¹„ë°€ë²ˆí˜¸ í‹€ë ¸ì„ë•Œ)
+		// ·Î±×ÀÎ ½ÇÆĞ½Ã (¾ø´Â ¾ÆÀÌµğ°Å³ª ºñ¹Ğ¹øÈ£ Æ²·ÈÀ»¶§)
 		if (memberVO == null || isPasswdSame == false) {
 
 			HttpHeaders headers = new HttpHeaders();
@@ -107,20 +108,22 @@ public class MemberController {
 
 			return new ResponseEntity<String>(str, headers, HttpStatus.OK);
 		}
-		// ë¡œê·¸ì¸ ì„±ê³µì‹œ, ë¡œê·¸ì¸ ì¸ì¦í•˜ê¸°
-		session.setAttribute("id", id);
-		// ë¡œê·¸ì¸ ìƒíƒœìœ ì§€ê°€ ì²´í¬ë˜ì—ˆìœ¼ë©´
-		if (rememberMe != null) {
-			Cookie cookie = new Cookie("id", id); // ë¡œê·¸ì¸ ì•„ì´ë””ë¡œ ì¿ í‚¤ì •ë³´ ìƒì„±
-			cookie.setPath("/");
-			cookie.setMaxAge(60 * 10); // ì´ˆë‹¨ìœ„. 60ì´ˆ * 10 -> 10ë¶„
 
-			response.addCookie(cookie); // ì‘ë‹µê°ì²´ì— ì¿ í‚¤ë¥¼ ì¶”ê°€í•´ë†“ìœ¼ë©´ ìµœì¢…ì‘ë‹µì‹œ ì¿ í‚¤ë¥¼ í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ì†¡í•´ì¤Œ
+		// ·Î±×ÀÎ ¼º°ø½Ã, ·Î±×ÀÎ ÀÎÁõÇÏ±â
+		session.setAttribute("id", id);
+
+		// ·Î±×ÀÎ »óÅÂÀ¯Áö°¡ Ã¼Å©µÇ¾úÀ¸¸é
+		if (rememberMe != null) {
+			Cookie cookie = new Cookie("id", id); // ·Î±×ÀÎ ¾ÆÀÌµğ·Î ÄíÅ°Á¤º¸ »ı¼º
+			cookie.setPath("/");
+			cookie.setMaxAge(60 * 10); // ÃÊ´ÜÀ§. 60ÃÊ * 10 -> 10ºĞ
+
+			response.addCookie(cookie); // ÀÀ´ä°´Ã¼¿¡ ÄíÅ°¸¦ Ãß°¡ÇØ³õÀ¸¸é ÃÖÁ¾ÀÀ´ä½Ã ÄíÅ°¸¦ Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü¼ÛÇØÁÜ
 		}
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", "/"); // redirect ê²½ë¡œë¥¼ "/"ë¡œ ì§€ì •
+		headers.add("Location", "/"); // redirect °æ·Î¸¦ "/"·Î ÁöÁ¤
 
-		// ë¦¬ë‹¤ì´ë ‰íŠ¸ì¼ ê²½ìš° HttpStatus.FOUND ë¡œ ì§€ì •í•´ì•¼ í•¨
+		// ¸®´ÙÀÌ·ºÆ®ÀÏ °æ¿ì HttpStatus.FOUND ·Î ÁöÁ¤ÇØ¾ß ÇÔ
 		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
 	} // login
 
@@ -129,22 +132,22 @@ public class MemberController {
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		//ì‚¬ìš©ì ë¡œê·¸ì¸ ê¶Œí•œ í™•ì¸
-		if (session.getAttribute("id") == null) { // ë¡œê·¸ì¸ ì•ˆí•œ ì‚¬ìš©ìë©´
+		//»ç¿ëÀÚ ·Î±×ÀÎ ±ÇÇÑ È®ÀÎ
+		if (session.getAttribute("id") == null) { // ·Î±×ÀÎ ¾ÈÇÑ »ç¿ëÀÚ¸é
 			return "redirect:/member/login";
 		}
 		
 		
-		// ì„¸ì…˜ ë¹„ìš°ê¸°
+		// ¼¼¼Ç ºñ¿ì±â
 		session.invalidate();
 		
-		// ë¡œê·¸ì¸ ìƒíƒœìœ ì§€ìš© ì¿ í‚¤ ìˆìœ¼ë©´ ì‚­ì œí•˜ê¸°
+		// ·Î±×ÀÎ »óÅÂÀ¯Áö¿ë ÄíÅ° ÀÖÀ¸¸é »èÁ¦ÇÏ±â
 		Cookie[] cookies = request.getCookies();
 		
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("id")) {
-					cookie.setMaxAge(0); // ë¸Œë¼ìš°ì €ê°€ ì‚­ì œí•  ìˆ˜ ìˆë„ë¡ 0ì´ˆë¡œ ì„¤ì •
+					cookie.setMaxAge(0); // ºê¶ó¿ìÀú°¡ »èÁ¦ÇÒ ¼ö ÀÖµµ·Ï 0ÃÊ·Î ¼³Á¤
 					cookie.setPath("/");
 					
 					response.addCookie(cookie);
@@ -152,7 +155,7 @@ public class MemberController {
 			} // for
 		}
 		
-		// í™ˆ í™”ë©´ìœ¼ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸ ì´ë™
+		// È¨ È­¸éÀ¸·Î ¸®´ÙÀÌ·ºÆ® ÀÌµ¿
 		return "redirect:/";
 	}
 }

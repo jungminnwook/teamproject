@@ -35,8 +35,8 @@
 	<div class="offcanvas-menu-wrapper">
 		<div class="offcanvas__cart">
 			<div class="offcanvas__cart__links">
-				<a href="#" class="search-switch"><img src="img/icon/search.png"
-					alt=""></a> <a href="#"><img src="img/icon/heart.png" alt=""></a>
+				<a href="#" class="search-switch"><img src="/resources/img/icon/search.png"
+					alt=""></a> <a href="#"><img src="/resources/img/icon/heart.png" alt=""></a>
 			</div>
 			<div class="offcanvas__cart__item">
 				<a href="#"><img src="img/icon/cart.png" alt=""> <span></span></a>
@@ -155,7 +155,7 @@
 	<section class="checkout spad">
 		<div class="container">
 			<div class="checkout__form">
-				<form action="#">
+				<form action="/member/login" method="POST">
 					<div class="row">
 						<div class="col-lg-8 col-md-6">
 							<div class="row">
@@ -164,7 +164,7 @@
 										<p>
 											아이디<span>*</span>
 										</p>
-										<input type="text">
+										<input type="text" name="id">
 									</div>
 								</div>
 							</div>
@@ -174,13 +174,13 @@
 										<p>
 											비밀번호<span>*</span>
 										</p>
-										<input type="text">
+										<input type="password" name="passwd">
 									</div>
 								</div>
 							</div>
 
 							<button class="btn btn-lg bg-warning">로그인</button>
-							<label for="acc"> 로그인 유지 <input type="checkbox" id="acc">
+							<label for="acc"> 로그인 유지 <input type="checkbox" id="acc" name="rememberMe">
 								<span class="checkmark"></span>
 							</label>
 						</div>

@@ -1,36 +1,89 @@
 package com.team.controller;
 
-//import java.text.DateFormat;
-//import java.util.Date;
-//import java.util.Locale;
-//
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.Mapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class HomeController {
-   
-   @GetMapping(value = {"/", "/index"})
-   public String home() {
-     // GET ÏöîÏ≤≠ 
-      // http://localhost:8090/
-      System.out.println("home() Ìò∏Ï∂úÎê®...");
-      
-      
-      return "index";// Ïã§ÌñâÌï† jspÎ∑∞ Ïù¥Î¶ÑÏùÑ Î¶¨ÌÑ¥Ìï®.
-   }
-   
-  
+	
+	@GetMapping(value = { "/", "/index" })
+	public String home() {
+		// GET ø‰√ª
+		// http://localhost:8090/
+		System.out.println("home() »£√‚µ ...");
+		
+		return "index"; // Ω««‡«“ jsp ∫‰ ¿Ã∏ß¿ª ∏Æ≈œ«‘
+	}
+	
+	
+//	@GetMapping("/display")
+//	@ResponseBody
+//	public ResponseEntity<byte[]> getImageFile(String fileName) throws IOException {
+//		System.out.println("fileName : " + fileName);
+//		
+//		File file = new File("C:/Dev_jun/upload", fileName);
+//		System.out.println("Ω«¡¶ ¿ÃπÃ¡ˆ ∆ƒ¿œ ∞Ê∑Œ : " + file.getPath());
+//		
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		
+//		String contentType = Files.probeContentType(file.toPath());
+//		headers.add("Content-Type", contentType); // "image/jpeg"  "image/png"
+//		
+//		byte[] imageData = FileCopyUtils.copyToByteArray(file);
+//		
+//		ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(imageData, headers, HttpStatus.OK);
+//		return responseEntity;
+//	}
+//	
+//	
+//	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<Resource> downloadFile(String fileName) throws UnsupportedEncodingException {
+//		System.out.println("fileName : " + fileName);
+//		
+//		File file = new File("C:/Dev_jun/upload", fileName);
+//		
+//		Resource resource = new FileSystemResource(file);
+//		System.out.println("resource : " + resource);
+//		
+//		if (resource.exists() == false) { // ¥ŸøÓ∑ŒµÂ«“ ∆ƒ¿œ¿Ã ¡∏¿Á«œ¡ˆ æ ¿∏∏È
+//			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND); // ¿⁄ø¯ æ¯¿Ω ¿¿¥‰ƒ⁄µÂ∑Œ ¿¿¥‰∫∏≥ª∞Ì ¡æ∑·
+//		}
+//		
+//		// ¥ŸøÓ∑ŒµÂ«“ ∆ƒ¿œ¿Ã ¡∏¿Á«œ∏È
+//		
+//		String resourceName = resource.getFilename();
+//		System.out.println("resourceName : " + resourceName);
+//		
+//		int beginIndex = resourceName.indexOf("_") + 1;
+//		String originFilename = resourceName.substring(beginIndex); // º¯ºˆ ∆ƒ¿œ∏Ì ±∏«œ±‚
+//		System.out.println("originFilename : " + originFilename);
+//		
+//		String downloadName = new String(originFilename.getBytes("UTF-8"), "ISO-8859-1"); // ¥ŸøÓ∑ŒµÂ ∆ƒ¿œ∏Ì¿∏∑Œ ∫Ø»Ø«œ±‚
+//		System.out.println("downloadName : " + downloadName);
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		//headers.add("Content-Type", "application/octet-stream"); // æ÷≥Î≈◊¿Ãº«¿« produces º”º∫¿∏∑Œ ¥Î√º
+//		headers.add("Content-Disposition", "attachment; filename=" + downloadName); // ¥ŸøÓ∑ŒµÂ ∆ƒ¿œ∏Ì¿ª «Ï¥ıø° º≥¡§«œ±‚
+//		
+//		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+//	}
+//	
+	
+	
 }

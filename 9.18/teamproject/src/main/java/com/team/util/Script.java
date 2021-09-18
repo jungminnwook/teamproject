@@ -6,7 +6,7 @@ public class Script {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('" + alertMessage + "');");
-		sb.append("location.href = '" + locationPath + "';"); // íŠ¹ì • ì´ë™ê²½ë¡œë¡œ ìš”ì²­
+		sb.append("location.href = '" + locationPath + "';"); // Æ¯Á¤ ÀÌµ¿°æ·Î·Î ¿äÃ»
 		sb.append("</script>");
 		return sb.toString();
 	}
@@ -15,7 +15,7 @@ public class Script {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('" + alertMessage + "');");
-		sb.append("history.back();"); // ë’¤ë¡œê°€ê¸°
+		sb.append("history.back();"); // µÚ·Î°¡±â
 		sb.append("</script>");
 		return sb.toString();
 	}

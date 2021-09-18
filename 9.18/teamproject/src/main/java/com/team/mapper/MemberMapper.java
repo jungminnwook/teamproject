@@ -12,8 +12,8 @@ import com.team.domain.MemberVO;
 
 public interface MemberMapper {
 
-	@Insert("INSERT INTO member (id, passwd, name, gender, phonenumber, email, address, birth, createat) "
-			+ " VALUES (#{id}, #{passwd}, #{name}, #{gender}, #{phonenumber}, #{email}, #{address}, #{birth}, #{createat}) ")
+	@Insert("INSERT INTO member (id, passwd, name, birth, gender, phonenumber, email, address1, address2, address3, create_at) "
+			+ " VALUES (#{id}, #{passwd}, #{name}, #{birth}, #{gender}, #{phonenumber}, #{email}, #{address1}, #{address2}, #{address3}, #{create_at}) ")
 	int insert(MemberVO memberVO);
 	
 	@Select("SELECT * FROM member WHERE id = #{id}")

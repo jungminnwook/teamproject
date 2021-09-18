@@ -8,18 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team.domain.MemberVO;
 import com.team.mapper.MemberMapper;
 
-@Service // @Component ê³„ì—´ ì• ë…¸í…Œì´ì…˜
+@Service // @Component °è¿­ ¾Ö³ëÅ×ÀÌ¼Ç
 //@Transactional
 public class MemberService {
 	
 	private MemberMapper memberMapper;
 
-	// @Autowired ì• ë…¸í…Œì´ì…˜ì´ ìƒì„±ìì—ì„œëŠ” ìƒëµê°€ëŠ¥ 
+	// @Autowired ¾Ö³ëÅ×ÀÌ¼ÇÀÌ »ı¼ºÀÚ¿¡¼­´Â »ı·«°¡´É 
 	public MemberService(MemberMapper memberMapper) {
 		this.memberMapper = memberMapper;
 	}
 	
-	// íšŒì›ê°€ì…í•˜ê¸°
+	// È¸¿ø°¡ÀÔÇÏ±â
 	public void register(MemberVO memberVO) {
 		
 //		long beginTime = System.currentTimeMillis();
@@ -29,7 +29,7 @@ public class MemberService {
 //		long endTime = System.currentTimeMillis();
 		
 //		long diff = endTime - beginTime;
-//		System.out.println("ë©”ì†Œë“œ ì‹¤í–‰ì‹œê°„ : " + diff + "ms");
+//		System.out.println("¸Ş¼Òµå ½ÇÇà½Ã°£ : " + diff + "ms");
 	}
 	
 	public MemberVO getMemberById(String id) {
