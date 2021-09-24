@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.test{
+	margin: 8%;
+
+}
+
+img.profile{
+   position:absolute;
+   right:360px;
+   background: #BDBDBD; 
+   top:8px;
+   border-radius: 100px 100px 100px 100px;
+   width: 30px;
+   height:30px;
+   }
